@@ -13,7 +13,7 @@ MODELS = [
     "text-embedding-ada-002",
 ]
 # Change this to try another language model.
-LLM_MODEL = "gpt-4.1-mini"
+LLM_MODEL = "gpt-6-luna"
 CANDIDATE_COUNT = 10
 SCORE_LABELS = {
     4: "Excellent match",
@@ -117,7 +117,7 @@ def rerank_with_llm(reference_text, candidates, api_key):
     client = OpenAI(api_key=api_key)
     completion = client.chat.completions.parse(
         model=LLM_MODEL,
-        temperature=0,
+        reasoning_effort="none",
         messages=[
             {"role": "system", "content": _RERANK_INSTRUCTIONS},
             {
